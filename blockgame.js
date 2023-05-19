@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let ballY = canvas.height - paddleHeight - ballRadius - 1;
     let ballDX = 2;
     let ballDY = -2;
+    let ballSpeedIncrease = 0.2;  // ボールの速度増加量
 
-    const brickRowCount = 3;
-    const brickColumnCount = 5;
+    const brickRowCount = 5;  // ブロックの行数を変更
+    const brickColumnCount = 7;  // ブロックの列数を変更
     const brickWidth = 75;
     const brickHeight = 20;
     const brickPadding = 10;
@@ -91,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             alert("Congratulations! You win!");
                             document.location.reload();
                         }
+                        // ボールの速度を上昇させる
+                        ballDX += ballSpeedIncrease;
+                        ballDY += ballSpeedIncrease;
                     }
                 }
             }
