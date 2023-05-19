@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawScore() {
         context.font = "16px Arial";
         context.fillStyle = "#0095DD";
-        context.fillText("Score: " + score, 8, 20);
+        context.fillText("Score: " + score, 8,20);
     }
 
     function collisionDetection() {
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         score++;
                         if (score === brickRowCount * brickColumnCount) {
                             alert("Congratulations! You win!");
-                            document.location.reload();
+                            restartGame();
                         }
                         // ボールの速度を上昇させる
                         ballDX += ballSpeedIncrease;
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ballDY = -ballDY;
             } else {
                 alert("Game Over");
-                document.location.reload();
+                restartGame();
             }
         }
 
@@ -149,6 +149,19 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (event.key === "Left" || event.key === "ArrowLeft") {
             leftPressed = false;
         }
+    }
+
+    function restartGame() {
+        score = 0;
+        ballDX = 2;
+        ballDY = -2;
+        paddleX = (canvas.width - paddleWidth) / 2;
+        bricks.forEach(column => {
+            column.forEach(brick => {
+                brick.status = 1;
+            });
+        });
+        draw();
     }
 
     document.addEventListener("keydown", keyDownHandler);
